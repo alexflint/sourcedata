@@ -28,7 +28,8 @@ def main(language, package="main", stream=sys.stdout):
 		else:
 			raise Exception("Unknown language: %s" % language)
 
-	stream.write("package %s\n\n" % package)
+	if language == golang:
+		stream.write("package %s\n\n" % package)
 
 	for generator, kwargs in _generators:
 		variables = collections.OrderedDict(list(generator()))
