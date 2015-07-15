@@ -115,6 +115,6 @@ The call to `go generate` will have generated the following file:
 package main
 
 // logsumexp_testdata
-var inputs = []float64{1.000000000000, 2.000000000000, 3.000000000000, 4.000000000000, 5.000000000000}
+var inputs = []float64{1.0, 2.0, 3.0, 4.0, 5.0}
 var expected float64 = 5.451914395937593
 ```
