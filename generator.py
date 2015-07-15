@@ -1,7 +1,8 @@
 import sys
+import collections
 
-import .cpp
-import .golang
+from . import cpp
+from . import golang
 
 
 _generators = []
@@ -18,7 +19,7 @@ def generator(**kwargs):
 	return inner
 
 
-def main(language, stream=sys.stdout):
+def main(language, package="main", stream=sys.stdout):
 	if isinstance(language, str):
 		if language == "cpp":
 			language = cpp
@@ -26,6 +27,9 @@ def main(language, stream=sys.stdout):
 			language = golang
 		else:
 			raise Exception("Unknown language: %s" % language)
+
+	stream.write("package %s\n\n" % package)
+
 	for generator, kwargs in _generators:
 		variables = collections.OrderedDict(list(generator()))
 		stream.write("// %s\n" % generator.__name__)

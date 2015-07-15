@@ -37,14 +37,11 @@ def expr(x, int_type="int", float_type="float64", precision=12):
 		raise TypeError("%s cannot be serialized to c++ source" % type(x).__name__)
 
 
-def dump(variables, f, package=None, indent=4, **kwargs):
+def dump(variables, f, indent=4, **kwargs):
 	close = False
 	if isinstance(f, str):
 		f = open(f, "w")
 		close = True
-
-	if package is not None:
-		f.write("package %s\n\n" % package)
 
 	for varname, value in variables.items():
 		golangtype, golangval = expr(value, **kwargs)
