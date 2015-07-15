@@ -67,25 +67,3 @@ def dumps(dict, **kwargs):
 	f = io.StringIO()
 	dump(dict, f, **kwargs)
 	return f.getvalue()
-
-
-_generators = []
-
-
-def register(f, namespace=None):
-	_generators.append((f, namespace))
-
-
-def generator(namespace=None):
-	def inner(f):
-		register(f, namespace=namespace)
-		return f
-	return inner
-
-
-def main(stream=sys.stdout):
-	for generator, namespace in _generators:
-		variables = collections.OrderedDict(list(generator()))
-		stream.write("// %s\n" % generator.__name__)
-		dump(variables, stream, namespace=namespace)
-		stream.write("\n")
