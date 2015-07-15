@@ -42,7 +42,8 @@ class CppTest(unittest.TestCase):
 int x[2][3] = {{0, 1, 2},
                {3, 4, 5}};
 """
-        self.assertEqual(dumps({"x": np.arange(6).reshape((2, 3))}), expected[1:])
+        x = np.arange(6).reshape((2, 3))
+        self.assertEqual(dumps({"x": x}), expected[1:])
 
     def test_multidim_array(self):
         expected = """
@@ -51,7 +52,8 @@ int x[2][2][3] = {{{0, 1, 2},
                   {{6, 7, 8},
                    {9, 10, 11}}};
 """
-        self.assertEqual(dumps({"x": np.arange(12).reshape((2, 2, 3))}), expected[1:])
+        x = np.arange(12).reshape((2, 2, 3))
+        self.assertEqual(dumps({"x": x}), expected[1:])
 
     def test_namespace(self):
         expected = """
